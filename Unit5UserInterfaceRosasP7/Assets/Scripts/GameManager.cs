@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets; 
     private float spawnRate = 1.0f; 
+    private int score;
+    public TextMeshProUGUI scoreText; 
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnTarget());
+        score = 0;
+        UpdateScore(0);
     }
 
     IEnumerator SpawnTarget()
@@ -19,7 +25,8 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targets.Count);
-            Instantiate(targets[index]); 
+            Instantiate(targets[index]);
+
         }
     }
 
@@ -28,5 +35,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UpdateScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+        scoreText.text = "Score: " + score; 
     }
 }
