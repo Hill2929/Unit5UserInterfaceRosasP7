@@ -48,6 +48,17 @@ public class Target : MonoBehaviour
     {
         Destroy(gameObject);
         if (!gameObject.CompareTag("Bad")) { gameManager.GameOver(); }
+
+        {
+            if (!gameObject.CompareTag("Bad"))
+            {
+                gameManager.Updatelifes(-1);
+                gameManager.GameOver();
+
+            }
+            Destroy(gameObject);
+
+        }
     }
 
     Vector3 RandomForce()
@@ -64,5 +75,5 @@ public class Target : MonoBehaviour
     {
         return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
-
+  
 }
